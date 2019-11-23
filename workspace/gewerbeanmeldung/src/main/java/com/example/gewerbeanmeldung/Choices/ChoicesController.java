@@ -1,18 +1,20 @@
 package com.example.gewerbeanmeldung.Choices;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
 @RestController
-@RequestMapping(path = "/frage")
+@RequestMapping(path = "/choice")
 public class ChoicesController {
 
-	/*
+	/*	
+	@RequestMapping(path = "/{id}/choices")
+	public List<Choices> getAllChoices(@PathVariable("id") Integer question_id) {	
+		return choicesService.getAllChoices(question_id);
+	}
+	
+
 	@Autowired
 	FrageartService frageService;
 

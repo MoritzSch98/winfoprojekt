@@ -1,16 +1,15 @@
 package com.example.gewerbeanmeldung.Choices;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
-
 import com.example.gewerbeanmeldung.QuestionType.QuestionType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 
 
 @Entity
@@ -24,11 +23,17 @@ public class Choices {
 	@NotNull
 	private String choice;
 	
-	@ManyToOne
-	@JoinColumn(name="question_id", nullable=false)
+	@ManyToMany(mappedBy = "choices")
 	@JsonIgnore
-	private QuestionType questionType;
+	private List<QuestionType> questionType = new ArrayList<>();
 
+	
+	public Choices() {
+	
+	}
+	public Choices(String choice) {
+		
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -45,11 +50,11 @@ public class Choices {
 		this.choice = choice;
 	}
 
-	public QuestionType getQuestionType() {
+	public List<QuestionType> getQuestionType() {
 		return questionType;
 	}
 
-	public void setQuestionType(QuestionType questionType) {
+	public void setQuestionType(List<QuestionType> questionType) {
 		this.questionType = questionType;
 	}
 

@@ -35,6 +35,10 @@ public class QuestionCategory{
 	@JsonIgnore
 	private List<Question> questions = new ArrayList<>();
 	
+	
+	@NotNull
+	private Long processNumber;
+	
 	public QuestionCategory() {
 		
 	}
@@ -70,6 +74,16 @@ public class QuestionCategory{
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
+	}
+
+
+	public Long getProcessNumber() {
+		return processNumber;
+	}
+
+
+	public void setProcessNumber(Long processNumber) {
+		this.processNumber = processNumber;
 	}
 	
 

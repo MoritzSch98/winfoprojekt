@@ -28,10 +28,17 @@ public class Question{
 	@NotNull
 	private String question;
 	
-	@OneToOne
+	@NotNull
+	@OneToOne(cascade = CascadeType.ALL)
 	@MapsId
 	private QuestionType questionType;
 	
+	private String hint;
+	
+	@NotNull
+	private String formType;
+	
+	@NotNull
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
 	        name = "Question_Category_Relation",
@@ -40,21 +47,6 @@ public class Question{
 	    )
 	List<QuestionCategory> questionCategories = new ArrayList<>();
 	
-	public QuestionType getQuestionType() {
-		return questionType;
-	}
-	
-	public List<QuestionCategory> getQuestionCategories() {
-		return questionCategories;
-	}
-
-	public void setQuestionCategories(List<QuestionCategory> questionCategories) {
-		this.questionCategories = questionCategories;
-	}
-
-	public void setQuestionType(QuestionType questionType) {
-		this.questionType = questionType;
-	}
 
 	public Question() {
 		
@@ -79,4 +71,36 @@ public class Question{
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+	public QuestionType getQuestionType() {
+		return questionType;
+	}
+	
+	public List<QuestionCategory> getQuestionCategories() {
+		return questionCategories;
+	}
+
+	public void setQuestionCategories(List<QuestionCategory> questionCategories) {
+		this.questionCategories = questionCategories;
+	}
+
+	public void setQuestionType(QuestionType questionType) {
+		this.questionType = questionType;
+	}
+
+	public String getHint() {
+		return hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+
+	public String getFormType() {
+		return formType;
+	}
+
+	public void setFormType(String formType) {
+		this.formType = formType;
+	}
+
 }
