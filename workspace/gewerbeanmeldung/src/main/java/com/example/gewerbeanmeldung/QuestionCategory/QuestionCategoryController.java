@@ -9,17 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gewerbeanmeldung.Question.Question;
 
-
 @RestController
 @RequestMapping(path = "")
 public class QuestionCategoryController {
 
 	@Autowired
 	private QuestionCategoryService questionCategoryService;
-	
-	//Gets all Questions with specific form-type
-		@RequestMapping(path = "category/{category}")
-		public List<Question> getByCategory(@PathVariable String category){
-			return questionCategoryService.getQuestionByCategory(category);
-		}
+
+	// Gets all Questions with specific form-type
+	@RequestMapping(path = "category/{category}")
+	public List<Question> getByCategory(@PathVariable String category) {
+		return questionCategoryService.getQuestionByCategory(category);
+	}
 }

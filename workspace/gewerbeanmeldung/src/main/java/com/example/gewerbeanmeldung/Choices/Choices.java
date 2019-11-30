@@ -1,4 +1,5 @@
 package com.example.gewerbeanmeldung.Choices;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,29 +12,30 @@ import javax.validation.constraints.NotNull;
 import com.example.gewerbeanmeldung.QuestionType.QuestionType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 public class Choices {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NotNull
 	private String choice;
-	
+
+	private Integer nextQuestionId = 0;
+
 	@ManyToMany(mappedBy = "choices")
 	@JsonIgnore
 	private List<QuestionType> questionType = new ArrayList<>();
 
-	
 	public Choices() {
-	
+
 	}
+
 	public Choices(String choice) {
-		
+
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -58,5 +60,12 @@ public class Choices {
 		this.questionType = questionType;
 	}
 
-	
+	public Integer getNextQuestionId() {
+		return nextQuestionId;
+	}
+
+	public void setNextQuestionId(Integer nextQuestionId) {
+		this.nextQuestionId = nextQuestionId;
+	}
+
 }

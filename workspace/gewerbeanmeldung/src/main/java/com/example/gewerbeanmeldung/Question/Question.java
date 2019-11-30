@@ -1,6 +1,5 @@
 package com.example.gewerbeanmeldung.Question;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,40 +18,35 @@ import com.example.gewerbeanmeldung.QuestionCategory.QuestionCategory;
 import com.example.gewerbeanmeldung.QuestionType.QuestionType;
 
 @Entity
-public class Question{
+public class Question {
 
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	
+
 	@NotNull
 	private String question;
-	
+
 	@NotNull
 	@OneToOne(cascade = CascadeType.ALL)
 	@MapsId
 	private QuestionType questionType;
-	
+
 	private String hint;
-	
+
 	@NotNull
 	private String formType;
-	
+
 	@NotNull
 	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-	        name = "Question_Category_Relation",
-	        joinColumns =  @JoinColumn(name = "question_id") , 
-	        inverseJoinColumns = @JoinColumn(name = "category_id")
-	    )
-	List<QuestionCategory> questionCategories = new ArrayList<>();
-	
+	@JoinTable(name = "Question_Category_Relation", joinColumns = @JoinColumn(name = "question_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	List<QuestionCategory> questionCategories;
 
 	public Question() {
-		
+
 	}
-	
-	public Question(String question){
+
+	public Question(String question) {
 		this.question = question;
 	}
 
@@ -71,10 +65,11 @@ public class Question{
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+
 	public QuestionType getQuestionType() {
 		return questionType;
 	}
-	
+
 	public List<QuestionCategory> getQuestionCategories() {
 		return questionCategories;
 	}

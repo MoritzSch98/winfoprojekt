@@ -9,53 +9,61 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping(path = "")
 public class QuestionController {
 
-	
 	@Autowired
 	QuestionService questionService;
-	
-	//Lists all Questions 
-		@RequestMapping(path = "/frage")
-		public List<Question> getAllQuestions() {	
-			return questionService.getAllQuestions();
-		}
-		
-	//Get a specific Question by ID
+
+	// Lists all Questions
+	@RequestMapping(path = "/frage")
+	public List<Question> getAllQuestions() {
+		return questionService.getAllQuestions();
+	}
+
+	// Get a specific Question by ID
 	@RequestMapping(path = "frage/{id}")
 	public Question getQuestionById(@PathVariable Integer id) {
 		return questionService.getQuestionById(id);
 	}
-		
-	//Gets all Questions with specific form-type
+
+	// Gets all Questions with specific form-type
 	@RequestMapping(path = "type/{formType}")
-	public List<Question> getByFormType(@PathVariable String formType){
+	public List<Question> getByFormType(@PathVariable String formType) {
 		return questionService.getByFormType(formType);
 	}
-	
-	//Add a new Question
-	@RequestMapping(
-	 method = RequestMethod.POST,value = "frage/add")
-	 public Question saveQuestion(@RequestBody Question question) {
-	     return questionService.saveQuestion(question);
+
+	// Get all questions within a formtype which have a specific category
+	@RequestMapping(path = "/type/{formType}/category/{category}")
+	public List<Question> getAllQuestionsOfFormTypeWithinCategory(@PathVariable String formType,
+			@PathVariable String category) {
+
+		return questionService.getAllQuestionsOfFormTypeWithinCategory(formType, category);
 	}
-	
-	//Edit a specific Question 
-	@RequestMapping(
-	 method = RequestMethod.PUT,value = "frage/{id}/edit")
-	 public Question editQuestion(@PathVariable Integer id, @RequestBody Question question) {
-	     return questionService.editQuestion(question, id);
+
+	// Add a new Question
+	@RequestMapping(method = RequestMethod.POST, value = "frage/add")
+	public String saveQuestion(@RequestBody Question question) {
+		return questionService.saveQuestion(question);
 	}
-	
-	//Deletes a specific Question
-	@RequestMapping(
-	method = RequestMethod.DELETE,value = "frage/{id}/delete")
-	public String deleteQuestionById(@PathVariable Integer id) {
-		questionService.deleteQuestionById(id);
-			  return "deleted";
+
+	// Adds the following question to an existing question
+	@RequestMapping(method = RequestMethod.PUT, value = "frage/{id}/addfollowing")
+	public String addFollowingQuestion(@PathVariable Integer id, @RequestBody Question question) {
+		return questionService.addFollowingQuestion(id, question);
 	}
-	
+
+	// Edit a specific Question
+	@RequestMapping(method = RequestMethod.PUT, value = "frage/{id}/edit")
+	public Question editQuestion(@PathVariable Integer id, @RequestBody Question question) {
+		return questionService.editQuestion(question, id);
+	}
+
+	// Deletes a specific Question
+	@RequestMapping(method = RequestMethod.DELETE, value = "frage/{id}/delete")
+	public String deleteQuestionById(@PathVariable Integer id) {	
+		return questionService.deleteQuestionById(id);
+	}
+
 }

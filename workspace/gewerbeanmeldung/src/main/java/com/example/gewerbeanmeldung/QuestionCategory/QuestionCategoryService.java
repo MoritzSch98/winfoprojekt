@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.example.gewerbeanmeldung.Question.Question;
 
-
 @Service
 public class QuestionCategoryService {
 
 	@Autowired
 	private QuestionCategoryRepository questionCategoryRepo;
-	
+
 	public void deleteAllCategories(List<QuestionCategory> qc) {
 		questionCategoryRepo.deleteAll(qc);
 	}
+
 	public List<Question> getQuestionByCategory(String category) {
 		QuestionCategory qc = questionCategoryRepo.findByCategory(category);
 		return qc.getQuestions();

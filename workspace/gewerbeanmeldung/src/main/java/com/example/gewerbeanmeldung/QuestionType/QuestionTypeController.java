@@ -9,18 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gewerbeanmeldung.Choices.Choices;
 
-
 @RestController
 @RequestMapping(path = "/frage")
 public class QuestionTypeController {
 
-	
 	@Autowired
 	QuestionTypeService questionTypeService;
-	//Lists all Choices
-		@RequestMapping(path = "/{id}/choices")
-		public List<Choices> getAllChoices(@PathVariable("id") Integer question_id) {	
-			return questionTypeService.getAllChoices(question_id);
-		}
-		
+
+	// Lists all Choices
+	@RequestMapping(path = "/{id}/choices")
+	public List<Choices> getAllChoices(@PathVariable("id") Integer question_id) {
+		return questionTypeService.getAllChoices(question_id);
+	}
+
 }

@@ -1,6 +1,5 @@
 package com.example.gewerbeanmeldung.QuestionCategory;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,35 +15,30 @@ import javax.validation.constraints.NotNull;
 import com.example.gewerbeanmeldung.Question.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-
-
 @Entity
-@Table(name="question_category")
-public class QuestionCategory{
+@Table(name = "question_category")
+public class QuestionCategory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@NotNull
 	private String category;
-	
+
 	@ManyToMany(mappedBy = "questionCategories")
 	@JsonIgnore
 	private List<Question> questions = new ArrayList<>();
-	
-	
+
 	@NotNull
 	private Long processNumber;
-	
+
 	public QuestionCategory() {
-		
+
 	}
-	
-	
-	public QuestionCategory(String category){
+
+	public QuestionCategory(String category) {
 		this.category = category;
 	}
 
@@ -56,35 +50,28 @@ public class QuestionCategory{
 		this.id = id;
 	}
 
-
 	public String getCategory() {
 		return category;
 	}
-
 
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
-
 	public List<Question> getQuestions() {
 		return questions;
 	}
-
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
-
 	public Long getProcessNumber() {
 		return processNumber;
 	}
 
-
 	public void setProcessNumber(Long processNumber) {
 		this.processNumber = processNumber;
 	}
-	
 
 }

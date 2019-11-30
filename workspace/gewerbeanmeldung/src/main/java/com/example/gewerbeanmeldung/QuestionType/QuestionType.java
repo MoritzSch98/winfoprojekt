@@ -17,37 +17,34 @@ import com.example.gewerbeanmeldung.Choices.Choices;
 import com.example.gewerbeanmeldung.Question.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
-public class QuestionType{
+public class QuestionType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+
+	private Integer nextQuestionId = 0;
 	
 	@NotNull
 	private String type;
-	
+
+
 	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-	        name = "QuestionType_Choices_Relation",
-	        joinColumns =  @JoinColumn(name = "question_type_id") , 
-	        inverseJoinColumns = @JoinColumn(name = "choices_id")
-	    )
+	@JoinTable(name = "QuestionType_Choices_Relation", joinColumns = @JoinColumn(name = "question_type_id"), inverseJoinColumns = @JoinColumn(name = "choices_id"))
 	private List<Choices> choices;
 
-	
 	@OneToOne(mappedBy = "questionType", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Question question;
-	
+
 	public QuestionType() {
 		
 	}
-	
-	public QuestionType(String type){
-		this.type =type;
+
+	public QuestionType(String type) {
+		this.type = type;
 	}
 
 	public Integer getId() {
@@ -72,6 +69,14 @@ public class QuestionType{
 
 	public void setChoices(List<Choices> choices) {
 		this.choices = choices;
+	}
+
+	public Integer getNextQuestionId() {
+		return nextQuestionId;
+	}
+
+	public void setNextQuestionId(Integer nextQuestionId) {
+		this.nextQuestionId = nextQuestionId;
 	}
 
 }
